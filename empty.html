@@ -8,150 +8,155 @@
         *:not(code) {
             font-family: sans-serif;
         }
+
+        table {
+            gap: 0;
+        }
+
+        /* Table header styling */
+        th {
+            border-bottom: 2px solid black;
+            text-align: left;
+            vertical-align: bottom;
+        }
+
+        td, th {
+            padding: 0.75em;
+            gap: 0;
+        }
+
+        .filter-dropdown {
+            margin-bottom: 20px;
+        }
+
+        .filter-dropdown select {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <h1>Class 7: Use loops to calculate vote difference</h1>
-    <h2>Goal: Using loops, calculate the vote difference from 2020 to 2024 for each candidate, add to a new array, and <code>console.log()</code> them with a function. Should look something like this:</h2>
-    <code>Kamala Harris won Manhattan with 82.4% of the vote, about 65 points more than Donald Trump, who had 17.6%. Harris has 169,509 more votes than Biden in 2020.</code>
+    <h1>Class 9: Create a dropdown that filters between democrat and republican data</h1>
+    <h2>Goal: Using Javascript events, have a user select an option to filter data. </h2>
     <h3>Things to keep in mind</h3>
     <ul>
-        <li>You'll have to do some mathmatical calculations and <code>.push()</code> to add to the new array.</li>
-        <li>The function on line 84 should 3NOT be touched -- you'll need to write a loop to populate it with your new array.</li>
-        <li>Make sure your variables and props are spelled correctly!</li>
-
+        <li>Look at the syntax for the <code>select/option</code> elements. This is a good resource: <a href="https://www.w3schools.com/tags/tag_select.asp">W3 Schools</a></li>
+        <li>Pay attention to the the option values -- Democrats has a value for <code>repData</code> and Republcians has one called <code>demData</code>. I did this on purpose so it's easier to filter </li>
     </ul>
-     <script>
-        //Votes 2024
-        const boroughs2024 = [
-            {
-                borough: "Manhattan",
-                trumpVotes2024: 113921,
-                harrisVotes2024: 533782
-            },
-            {
-                borough: "Bronx",
-                trumpVotes2024: 98174,
-                harrisVotes2024: 261670
-            },
-            {
-                borough: "Brooklyn",
-                trumpVotes2024: 233964,
-                harrisVotes2024: 601265
-            },
-            {
-                borough: "Queens",
-                trumpVotes2024: 264628,
-                harrisVotes2024: 437282
-            },
-            {
-                borough: "Staten Island",
-                trumpVotes2024: 128151,
-                harrisVotes2024: 69345
-            }
-        ];
 
-        //Votes 2020
-        const boroughs2020 = [
-            {
-                borough: "Manhattan",
-                trumpVotes2020: 84450,
-                bidenVotes2020: 364273
-            },
-            {
-                borough: "Bronx",
-                trumpVotes2020: 55882,
-                bidenVotes2020: 318403
-            },
-            {
-                borough: "Brooklyn",
-                trumpVotes2020: 133653,
-                bidenVotes2020: 487134
-            },
-            {
-                borough: "Queens",
-                trumpVotes2020: 155385,
-                bidenVotes2020: 422624
-            },
-            {
-                borough: "Staten Island",
-                trumpVotes2020: 96517,
-                bidenVotes2020: 67620
-            }
-        ];
+    <select id="filterDropdown">
+        <option value="all">Show All</option>
+        <option value="repData">Democrats</option>
+        <option value="demData">Republicans</option>
+    </select>
 
+    <!-- Select the table below!-->
+    <table id="table">
+        <thead id="table_head">
+            <tr>
+                <th>Borough</th>
+                <th data-party="repData">2024 Trump votes</th>
+                <th data-party="demData">2024 Harris votes</th>
+                <th data-party="demData">Democrat vote change from 2020</th>
+                <th data-party="repData">Republican vote change from 2020</th>
+                <th data-party="demData">Harris vote percentage</th>
+                <th data-party="repData">Trump vote percentage</th>
+            </tr>
+        </thead>
+        <tbody id="table_body">
+            <tr>
+                <td>Manhattan</td>
+                <td data-party="repData">113,921</td>
+                <td data-party="demData">533,782</td>
+                <td data-party="demData">169,509</td>
+                <td data-party="repData">29,471</td>
+                <td data-party="demData">82.39%</td>
+                <td data-party="repData">17.61%</td>
+            </tr>
+            <tr>
+                <td>Bronx</td>
+                <td data-party="repData">98,174</td>
+                <td data-party="demData">261,670</td>
+                <td data-party="demData">-56,733</td>
+                <td data-party="repData">42,292</td>
+                <td data-party="demData">72.74%</td>
+                <td data-party="repData">27.26%</td>
+            </tr>
+            <tr>
+                <td>Brooklyn</td>
+                <td data-party="repData">233,964</td>
+                <td data-party="demData">601,265</td>
+                <td data-party="demData">114,131</td>
+                <td data-party="repData">100,311</td>
+                <td data-party="demData">71.97%</td>
+                <td data-party="repData">28.03%</td>
+            </tr>
+            <tr>
+                <td>Queens</td>
+                <td data-party="repData">264,628</td>
+                <td data-party="demData">437,282</td>
+                <td data-party="demData">14,658</td>
+                <td data-party="repData">109,243</td>
+                <td data-party="demData">62.29%</td>
+                <td data-party="repData">37.71%</td>
+            </tr>
+            <tr>
+                <td>Staten Island</td>
+                <td data-party="repData">128,151</td>
+                <td data-party="demData">69,345</td>
+                <td data-party="demData">17,175</td>
+                <td data-party="repData">31,634</td>
+                <td data-party="demData">35.11%</td>
+                <td data-party="repData">64.89%</td>
+            </tr>
+        </tbody>
+    </table>
 
-        function getPopularVote(borough, votesHarris2024, votesTrump2024, votesBiden2020, votesTrump2020, voteDifferenceTrump, voteDifferenceHarris){
-            
-            //calculates vote difference
+    <script>
+        // Get the dropdown element
+        let dropdown = document.getElementById('filterDropdown');
 
-            const totalvotes = votesHarris2024 + votesTrump2024;
-            kamalaPercent = ((votesHarris2024 / totalvotes) * 100).toFixed(1);
-            trumpPercent = ((votesTrump2024 / totalvotes) * 100).toFixed(1);
-            margin = (kamalaPercent - trumpPercent).toFixed(0);
+        //query select all <td> elements
+        let td = document.querySelectorAll('td');
 
-            //prints messages based on songs
+        //query select all <th> elements
+       
+        let th = document.querySelectorAll('th');
 
-            if (votesHarris2024 > votesTrump2024){
+        // Add an event listener when the dropdown changes (the function inside this should include the filter value and the two for each loops below)
+  
 
-                //if harris won by more votes than biden in 2020
+            // Get the selected value in the dropdown
+            this.addEventListener('change', function(){
 
-                if (votesHarris2024 > votesBiden2020) {
-                    console.log(`Kamala Harris won ${borough} with ${kamalaPercent}% of the vote, about ${margin} points more than Donald Trump, who had ${trumpPercent}%. Harris has ${voteDifferenceHarris.toLocaleString()} more votes than Biden in 2020`);
-                }
-                else {
-                    console.log(`Kamala Harris won ${borough} with ${kamalaPercent}% of the vote, about ${margin} points more than Donald Trump, who had ${trumpPercent}%. Harris has ${-voteDifferenceHarris.toLocaleString()} less votes than Biden in 2020`);
-                }
-            }
-            else { //if trump won
-
-                //if trump won by more votes than in 2020
-                if (votesTrump2024 > votesTrump2020) {
-                    console.log(`Donald Trump won ${borough} with ${trumpPercent}% of the vote, about ${margin} points more than Kamala Harris, who had ${kamalaPercent}%. Trump has ${voteDifferenceTrump.toLocaleString()} more votes than he did in 2020`);
-                }
-                else {
-                    console.log(`Donald Trump won ${borough} with ${trumpPercent}% of the vote, about ${margin} points more than Kamala Harris, who had ${kamalaPercent}%. Trump has ${voteDifferenceTrump.toLocaleString()} less votes than he did in 2020`);
-                }
-
-            }
-
-            
-        }
-
-        let nyc_boroughs = [];
-
-        //make a loop that gets the vote difference from 2020 to 2024 for each candidate
-
-       //For Loop
-
-
-        for (let index = 0; index < 5; index++){
-            let voteDifferenceTrump = boroughs2024[nyc_boroughs].trumpVotes2024 - boroughs2020[nyc_boroughs].trumpVotes2020;
-            let voteDifferenceHarris = boroughs2024[nyc_boroughs].harrisVotes2024 - boroughs2020[nyc_boroughs].harrisVotes2020; 
-            let borough = boroughs2024[nyc_boroughs].borough
-            let item = [];
-            item.voteDifferenceHarris = voteDifferenceHarris;
-            item.voteDifferenceTrump = voteDifferenceTrump;
-            item.borough = borough;
-            nyc_boroughs.push(item)
-        }
-
-        console.log(nyc_boroughs.borough);
-
-            //make a blank object inside the loop
-
-            //calcuate the vote difference for each party
-
-            //assign the rest of the properties to the blank object
-
-            //add the object to nyc_boroughs
-
-
-        //write a loop that goes through nyc_boroughs and runs the function
-
-
+         let filterValue = this.value;
         
-    
-     </script>
+            // Make a for each loop that goes through each <td> element
+            td.forEach(function(cell) {
+                //if the dropdown value equals the data-party of the cell, set the display to none
+                if (filterValue == cell.getAttribute('data-party')){
+                cell.style.display = 'none';
+                }
+                else {
+                cell.style.display = 'table-cell'; 
+                }
+            });
+        
+            // Make a for each loop that goes through each <th> element
+            th.forEach(function(header) {
+                //if the dropdown value equals the data-party of the cell, set the display to none
+                if (filterValue == header.getAttribute('data-party')){
+                header.style.display = 'table-cell';
+                }
+                else {
+                header.style.display = 'none'; 
+                }
+            });
+        });
+
+// Show all items if filter is "all", otherwise filter by class
+
+    </script>
 </body>
 </html>
